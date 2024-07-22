@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="Leonardo">
+        <createTable tableName="usuario">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="nome" type="varchar(50)" />
+            <column name="cpf" type="varchar(11)"/>
+        </createTable>
+
+        <createTable tableName="tarefa">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="titulo" type="varchar(100)" />
+            <column name="descricao" type="varchar(300)"/>
+            <column name="situacao" type="varchar(50)"/>
+            <column name="dataCriacao" type="date"/>
+            <column name="dataVencimento" type="date"/>
+            <column name="usuario_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_usuario_id" references="usuario(id)"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>
