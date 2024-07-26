@@ -2,9 +2,7 @@ package br.com.leonardo.tarefas.dto;
 
 import br.com.leonardo.tarefas.entity.Usuario;
 import br.com.leonardo.tarefas.enums.Situacao;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
