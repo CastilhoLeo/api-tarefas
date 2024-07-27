@@ -6,7 +6,9 @@ import br.com.leonardo.tarefas.entity.Tarefa;
 import br.com.leonardo.tarefas.entity.Usuario;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TarefaConverter {
 
     @Autowired
