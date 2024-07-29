@@ -7,13 +7,6 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet id="1" author="Leonardo">
-        <createTable tableName="usuario">
-            <column name="id" autoIncrement="true" type="bigint">
-                <constraints primaryKey="true" nullable="false" />
-            </column>
-            <column name="nome" type="varchar(50)" />
-            <column name="cpf" type="varchar(11)"/>
-        </createTable>
 
         <createTable tableName="tarefa">
             <column name="id" autoIncrement="true" type="bigint">
@@ -22,11 +15,8 @@
             <column name="titulo" type="varchar(100)" />
             <column name="descricao" type="varchar(300)"/>
             <column name="situacao" type="varchar(50)"/>
-            <column name="dataCriacao" type="date"/>
-            <column name="dataVencimento" type="date"/>
-            <column name="usuario_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_usuario_id" references="usuario(id)"/>
-            </column>
+            <column name="data_criacao" type="date"/>
+            <column name="data_vencimento" type="date"/>
 
         </createTable>
 

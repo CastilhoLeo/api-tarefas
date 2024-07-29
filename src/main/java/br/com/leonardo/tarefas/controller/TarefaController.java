@@ -6,27 +6,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/tarefas")
+@RequestMapping("tarefas")
 public class TarefaController {
 
     @Autowired
     private TarefaService tarefaService;
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<TarefaDTO> cadastrarTarefa(@RequestBody TarefaDTO tarefaDTO){
 
         return ResponseEntity.ok()
                 .body(tarefaService.cadastrarTarefa(tarefaDTO));
     }
 
-    @PutMapping("/cadastro/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<TarefaDTO> editarTarefa(@PathVariable Long id, @RequestBody TarefaDTO tarefaDTO){
-        return ResponseEntity.ok().body(tarefaService.editarTarefa(id, tarefaDTO));
+        return ResponseEntity.ok()
+                .body(tarefaService.editarTarefa(id, tarefaDTO));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity localizarPeloId(@PathVariable Long id){
         return ResponseEntity.ok().build();
     }
+
+
+    @GetMapping
+    public ResponseEntity<List<TarefaDTO>> localizarTodos(){
+        return ResponseEntity.ok()
+                .body(tarefaService.pesquisarTodos());
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deletarTarefa(@PathVariable Long id){
+
+        tarefaService.deletarTarefa(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

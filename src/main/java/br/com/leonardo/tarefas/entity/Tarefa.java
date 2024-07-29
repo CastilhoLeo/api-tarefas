@@ -25,17 +25,16 @@ public class Tarefa {
 
     private String descricao;
 
+    @Column(name = "data_criacao")
     @Temporal(TemporalType.DATE)
     private LocalDate dataCriacao;
 
+    @Column(name = "data_vencimento")
     @Temporal(TemporalType.DATE)
     private LocalDate dataVencimento;
 
     @Enumerated(EnumType.ORDINAL)
     private Situacao situacao;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
 
 }
