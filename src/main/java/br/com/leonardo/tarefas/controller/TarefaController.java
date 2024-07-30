@@ -2,6 +2,7 @@ package br.com.leonardo.tarefas.controller;
 
 import br.com.leonardo.tarefas.dto.TarefaDTO;
 import br.com.leonardo.tarefas.service.TarefaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +17,21 @@ public class TarefaController {
     private TarefaService tarefaService;
 
     @PostMapping()
-    public ResponseEntity<TarefaDTO> cadastrarTarefa(@RequestBody TarefaDTO tarefaDTO){
+    public ResponseEntity<TarefaDTO> cadastrarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
 
         return ResponseEntity.ok()
                 .body(tarefaService.cadastrarTarefa(tarefaDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TarefaDTO> editarTarefa(@PathVariable Long id, @RequestBody TarefaDTO tarefaDTO){
+    public ResponseEntity<TarefaDTO> editarTarefa(@PathVariable Long id, @RequestBody @Valid TarefaDTO tarefaDTO){
         return ResponseEntity.ok()
                 .body(tarefaService.editarTarefa(id, tarefaDTO));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity localizarPeloId(@PathVariable Long id){
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(tarefaService.localizarPeloId(id));
     }
 
 
