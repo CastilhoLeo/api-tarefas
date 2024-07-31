@@ -1,11 +1,16 @@
 package br.com.leonardo.tarefas.controller;
 
 import br.com.leonardo.tarefas.dto.TarefaDTO;
+import br.com.leonardo.tarefas.enums.Situacao;
 import br.com.leonardo.tarefas.service.TarefaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -16,28 +21,31 @@ public class TarefaController {
     private TarefaService tarefaService;
 
     @PostMapping()
-    public ResponseEntity<TarefaDTO> cadastrarTarefa(@RequestBody TarefaDTO tarefaDTO){
+    public ResponseEntity<TarefaDTO> cadastrarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
 
         return ResponseEntity.ok()
                 .body(tarefaService.cadastrarTarefa(tarefaDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TarefaDTO> editarTarefa(@PathVariable Long id, @RequestBody TarefaDTO tarefaDTO){
+    public ResponseEntity<TarefaDTO> editarTarefa(@PathVariable Long id, @RequestBody @Valid TarefaDTO tarefaDTO){
         return ResponseEntity.ok()
                 .body(tarefaService.editarTarefa(id, tarefaDTO));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity localizarPeloId(@PathVariable Long id){
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(tarefaService.localizarPeloId(id));
     }
 
 
     @GetMapping
-    public ResponseEntity<List<TarefaDTO>> localizarTodos(){
+    public ResponseEntity<Page<TarefaDTO>> pesquisaDinamica(@RequestParam (value = "dataInicial", required = false) LocalDate dataInicial,
+                                                            @RequestParam (value = "dataFinal", required = false)LocalDate dataFinal,
+                                                            @RequestParam (value = "situacao", required = false)Situacao situacao,
+                                                            Pageable pageable){
         return ResponseEntity.ok()
-                .body(tarefaService.pesquisarTodos());
+                .body(tarefaService.pesquisaDinamica(dataInicial, dataFinal, situacao, pageable));
     }
 
     @DeleteMapping("{id}")

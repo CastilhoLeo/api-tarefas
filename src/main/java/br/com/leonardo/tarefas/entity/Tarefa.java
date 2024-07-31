@@ -33,7 +33,7 @@ public class Tarefa {
     @Temporal(TemporalType.DATE)
     private LocalDate dataVencimento;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Situacao situacao;
 
 

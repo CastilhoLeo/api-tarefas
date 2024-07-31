@@ -3,9 +3,13 @@ package br.com.leonardo.tarefas.service;
 import br.com.leonardo.tarefas.converter.TarefaConverter;
 import br.com.leonardo.tarefas.dto.TarefaDTO;
 import br.com.leonardo.tarefas.entity.Tarefa;
+import br.com.leonardo.tarefas.enums.Situacao;
 import br.com.leonardo.tarefas.exception.TarefaNaoEncontradaException;
 import br.com.leonardo.tarefas.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -60,5 +64,19 @@ public class TarefaService {
         Tarefa tarefaSalva = tarefaRepository.save(tarefa);
 
         return tarefaConverter.toDTO(tarefaSalva);
+    }
+
+    public Page<TarefaDTO> pesquisaDinamica(LocalDate dataInicial, LocalDate dataFinal, Situacao situacao, Pageable pageable){
+
+        if(dataInicial == null && dataFinal == null && situacao == null){
+            return tarefaRepository.findAll(pageable).map(tarefa->tarefaConverter.toDTO(tarefa));
+        }
+        else {
+
+            Page<Tarefa> page = tarefaRepository.pesquisaDinamica(dataInicial, dataInicial, situacao, pageable);
+            Page<TarefaDTO> pageDTO = page.map(tarefa -> tarefaConverter.toDTO(tarefa));
+
+            return pageDTO;
+        }
     }
 }
