@@ -5,13 +5,14 @@ import br.com.leonardo.tarefas.enums.Situacao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 
 @Repository
-public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
+public interface TarefaRepository extends JpaRepository<Tarefa, Long>, JpaSpecificationExecutor<Tarefa> {
 
 //    @Query("select t from Tarefa t " +
 //            "where t.dataVencimento between :dataInicial and :dataFinal " +
@@ -19,5 +20,5 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 //    Page<Tarefa> pesquisaDinamica (LocalDate dataInicial, LocalDate dataFinal, Situacao situacao, Pageable pageable);
 
 
-    Page<Tarefa> findByDataVencimentoBetweenAndSituacao (LocalDate dataInicial, LocalDate dataFinal, Situacao situacao, Pageable pageable);
+    Page<Tarefa> findBySituacaoAndDataVencimentoBetween (Situacao situacao, LocalDate dataInicial, LocalDate dataFinal, Pageable pageable);
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -73,8 +74,10 @@ public class TarefaService {
         }
         else {
 
-            Page<Tarefa> page = tarefaRepository.findByDataVencimentoBetweenAndSituacao (dataInicial, dataInicial, situacao, pageable);
+            Page<Tarefa> page = tarefaRepository.findBySituacaoAndDataVencimentoBetween(situacao, dataInicial, dataFinal, pageable);
             Page<TarefaDTO> pageDTO = page.map(tarefa -> tarefaConverter.toDTO(tarefa));
+
+           // tarefaRepository.find ver o especification
 
             return pageDTO;
         }
