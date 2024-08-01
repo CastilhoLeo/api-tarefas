@@ -73,7 +73,7 @@ public class TarefaService {
         }
         else {
 
-            Page<Tarefa> page = tarefaRepository.pesquisaDinamica(dataInicial, dataInicial, situacao, pageable);
+            Page<Tarefa> page = tarefaRepository.findByDataVencimentoBetweenAndSituacao (dataInicial, dataInicial, situacao, pageable);
             Page<TarefaDTO> pageDTO = page.map(tarefa -> tarefaConverter.toDTO(tarefa));
 
             return pageDTO;
