@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.time.LocalDate;
 
 @RestController
 @RequestMapping("tarefas")
@@ -38,12 +37,11 @@ public class TarefaController {
 
 
     @GetMapping
-    public ResponseEntity<Page<TarefaDTO>> pesquisaDinamica(@RequestParam (value = "dataInicial", required = false) LocalDate dataInicial,
-                                                            @RequestParam (value = "dataFinal", required = false)LocalDate dataFinal,
-                                                            @RequestParam (value = "situacao", required = false)Situacao situacao,
-                                                            Pageable pageable){
+    public ResponseEntity<Page<TarefaDTO>> pesquisaDinamica(
+                                                @RequestParam (value = "situacao", required = false)Situacao situacao,
+                                                Pageable pageable){
         return ResponseEntity.ok()
-                .body(tarefaService.pesquisaDinamica(dataInicial, dataFinal, situacao, pageable));
+                .body(tarefaService.pesquisaDinamica(situacao, pageable));
     }
 
     @DeleteMapping("{id}")

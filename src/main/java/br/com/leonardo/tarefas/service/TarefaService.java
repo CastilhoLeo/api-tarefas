@@ -67,17 +67,15 @@ public class TarefaService {
         return tarefaConverter.toDTO(tarefaSalva);
     }
 
-    public Page<TarefaDTO> pesquisaDinamica(LocalDate dataInicial, LocalDate dataFinal, Situacao situacao, Pageable pageable){
+    public Page<TarefaDTO> pesquisaDinamica(Situacao situacao, Pageable pageable){
 
-        if(dataInicial == null && dataFinal == null && situacao == null){
+        if(situacao == null){
             return tarefaRepository.findAll(pageable).map(tarefa->tarefaConverter.toDTO(tarefa));
         }
         else {
 
-            Page<Tarefa> page = tarefaRepository.findBySituacaoAndDataVencimentoBetween(situacao, dataInicial, dataFinal, pageable);
+            Page<Tarefa> page = tarefaRepository.findBySituacao(situacao, pageable);
             Page<TarefaDTO> pageDTO = page.map(tarefa -> tarefaConverter.toDTO(tarefa));
-
-           // tarefaRepository.find ver o especification
 
             return pageDTO;
         }
