@@ -61,13 +61,13 @@ public class TarefaService {
     public Page<TarefaDTO> pesquisaDinamica(Situacao situacao, Pageable pageable){
 
         if(situacao == null){
-            Page<TarefaDTO> pageDTO = this.tarefaRepository.findAll(pageable).map((tarefa)->tarefaConverter.toDTO(tarefa));
+            Page<TarefaDTO> pageDTO = this.tarefaRepository.findAll(pageable).map(tarefaConverter::toDTO);
             return pageDTO;
         }
         else {
 
             Page<Tarefa> page = this.tarefaRepository.findBySituacao(situacao, pageable);
-            Page<TarefaDTO> pageDTO = page.map((tarefa) -> tarefaConverter.toDTO(tarefa));
+            Page<TarefaDTO> pageDTO = page.map(tarefaConverter::toDTO);
 
             return pageDTO;
         }

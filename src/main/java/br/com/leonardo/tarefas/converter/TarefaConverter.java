@@ -16,8 +16,6 @@ public class TarefaConverter {
         public TarefaDTO toDTO(Tarefa tarefa){
 
             return modelMapper.map(tarefa, TarefaDTO.class);
-
-
         }
 
         public Tarefa toEntity(TarefaDTO tarefaDTO){

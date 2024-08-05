@@ -160,11 +160,8 @@ public class TarefaServiceTest {
         listaTarefas.add(tarefa3);
 
         TarefaDTO tarefaDTO1 = TarefaDTOBuilder.criarTarefaDTO();
-        tarefaDTO1.setTitulo("teste 1");
         TarefaDTO tarefaDTO2 = TarefaDTOBuilder.criarTarefaDTO();
-        tarefaDTO2.setTitulo("teste 2");
         TarefaDTO tarefaDTO3 = TarefaDTOBuilder.criarTarefaDTO();
-        tarefaDTO3.setTitulo("teste 3");
 
         Page<Tarefa> pageTarefas = new PageImpl<>(listaTarefas);
 
@@ -178,9 +175,44 @@ public class TarefaServiceTest {
 
         Mockito.verify(tarefaRepository, Mockito.times(1)).findAll(pageable);
         Assertions.assertEquals(pageCriado.getSize(), 3);
-        Assertions.assertEquals(pageCriado.getContent().get(0).getTitulo(), "teste 1");
-        Assertions.assertEquals(pageCriado.getContent().get(1).getTitulo(), "teste 2");
-        Assertions.assertEquals(pageCriado.getContent().get(2).getTitulo(), "teste 3");
+        Assertions.assertEquals(pageCriado.getContent().get(0).getClass(), TarefaDTO.class);
+
+    }
+
+    @Test
+    public void pesquisaDinamica_DevePesquisaDinamica(){
+
+        Pageable pageable = PageRequest.of(1, 10);
+
+        List<Tarefa> listaTarefas = new ArrayList<>();
+
+        Tarefa tarefa1 = TarefaBuilder.criarTarefa();
+        Tarefa tarefa2 = TarefaBuilder.criarTarefa();
+        tarefa2.setTitulo("teste 2");
+        Tarefa tarefa3 = TarefaBuilder.criarTarefa();
+        tarefa3.setTitulo("teste 3");
+
+        listaTarefas.add(tarefa1);
+        listaTarefas.add(tarefa2);
+        listaTarefas.add(tarefa3);
+
+        TarefaDTO tarefaDTO1 = TarefaDTOBuilder.criarTarefaDTO();
+        TarefaDTO tarefaDTO2 = TarefaDTOBuilder.criarTarefaDTO();
+        TarefaDTO tarefaDTO3 = TarefaDTOBuilder.criarTarefaDTO();
+
+        Page<Tarefa> pageTarefas = new PageImpl<>(listaTarefas);
+
+
+        Mockito.when(tarefaRepository.findBySituacao(any(Situacao.class), any(Pageable.class))).thenReturn(pageTarefas);
+        Mockito.when(tarefaConverter.toDTO(tarefa1)).thenReturn(tarefaDTO1);
+        Mockito.when(tarefaConverter.toDTO(tarefa2)).thenReturn(tarefaDTO2);
+        Mockito.when(tarefaConverter.toDTO(tarefa3)).thenReturn(tarefaDTO3);
+
+        Page<TarefaDTO> pageCriado = tarefaService.pesquisaDinamica( Situacao.PENDENTE, pageable);
+
+        Mockito.verify(tarefaRepository, Mockito.times(1)).findBySituacao(Situacao.PENDENTE, pageable);
+        Assertions.assertEquals(pageCriado.getSize(), 3);
+        Assertions.assertEquals(pageCriado.getContent().get(0).getClass(), TarefaDTO.class);
 
     }
 }

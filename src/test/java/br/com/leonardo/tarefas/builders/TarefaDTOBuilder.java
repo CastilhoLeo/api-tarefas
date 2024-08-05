@@ -1,7 +1,6 @@
 package br.com.leonardo.tarefas.builders;
 
 import br.com.leonardo.tarefas.dto.TarefaDTO;
-import br.com.leonardo.tarefas.entity.Tarefa;
 import br.com.leonardo.tarefas.enums.Situacao;
 import lombok.Data;
 import lombok.Setter;
