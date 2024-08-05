@@ -177,6 +177,7 @@ public class TarefaServiceTest {
         Page<TarefaDTO> pageCriado = tarefaService.pesquisaDinamica( null, pageable);
 
         Mockito.verify(tarefaRepository, Mockito.times(1)).findAll(pageable);
+        Assertions.assertEquals(pageCriado.getSize(), 3);
         Assertions.assertEquals(pageCriado.getContent().get(0).getTitulo(), "teste 1");
         Assertions.assertEquals(pageCriado.getContent().get(1).getTitulo(), "teste 2");
         Assertions.assertEquals(pageCriado.getContent().get(2).getTitulo(), "teste 3");
