@@ -8,9 +8,7 @@ import br.com.leonardo.tarefas.exception.TarefaNaoEncontradaException;
 import br.com.leonardo.tarefas.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -33,13 +31,6 @@ public class TarefaService {
         return tarefaConverter.toDTO(tarefa);
     }
 
-    public List<TarefaDTO> pesquisarTodos(){
-        List<Tarefa> lista = tarefaRepository.findAll();
-
-        List<TarefaDTO>listaDTO = lista.stream().map((tarefa)->tarefaConverter.toDTO(tarefa)).toList();
-
-        return listaDTO;
-    }
 
     public void deletarTarefa(Long id){
         tarefaRepository.deleteById(id);
@@ -70,11 +61,12 @@ public class TarefaService {
     public Page<TarefaDTO> pesquisaDinamica(Situacao situacao, Pageable pageable){
 
         if(situacao == null){
-            return tarefaRepository.findAll(pageable).map(tarefa->tarefaConverter.toDTO(tarefa));
+            Page<TarefaDTO> pageDTO = this.tarefaRepository.findAll(pageable).map(tarefa->tarefaConverter.toDTO(tarefa));
+            return pageDTO;
         }
         else {
 
-            Page<Tarefa> page = tarefaRepository.findBySituacao(situacao, pageable);
+            Page<Tarefa> page = this.tarefaRepository.findBySituacao(situacao, pageable);
             Page<TarefaDTO> pageDTO = page.map(tarefa -> tarefaConverter.toDTO(tarefa));
 
             return pageDTO;
