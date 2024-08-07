@@ -4,6 +4,7 @@ import br.com.leonardo.tarefas.builders.TarefaDTOBuilder;
 import br.com.leonardo.tarefas.dto.TarefaDTO;
 import br.com.leonardo.tarefas.service.TarefaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -11,10 +12,17 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -87,16 +95,31 @@ public class TarefaControllerTest {
     @Test
     public void pesquisaDinmica_deveRetornarTodasAsTarefas() throws Exception{
 
+        Pageable pageable = PageRequest.of(1,20);
+
         TarefaDTO tarefaDTO1 = TarefaDTOBuilder.criarTarefaDTO();
         TarefaDTO tarefaDTO2 = TarefaDTOBuilder.criarTarefaDTO();
         tarefaDTO2.setTitulo("teste 2");
 
-        Mockito.when(tarefaService.pesquisaDinamica(null, pageable))
+        List<TarefaDTO> lista = new ArrayList<>();
+        lista.add(tarefaDTO1);
+        lista.add(tarefaDTO2);
+
+        Page<TarefaDTO> page = new PageImpl<>(lista);
+
+        Mockito.when(tarefaService.pesquisaDinamica(null, pageable)).thenReturn(page);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/tarefas")
+                        .param("situacao", "")
+                        .param("page", "1")
+                        .param("size", "20")
+
                 .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.content[0].id", Matchers.nullValue()));
+
+        Mockito.verify(tarefaService, Mockito.times(1)).pesquisaDinamica(null, pageable);
     }
 
 
