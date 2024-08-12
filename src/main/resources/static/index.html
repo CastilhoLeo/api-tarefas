@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>TAREFAS</h1>
+    </header>
+
+    <div id="pesquisa">
+
+        <label for="situacao">Situação</label>
+        <select id="situacao">
+            <option value="" id="todos">TODOS</option>
+            <option value="EM ANDAMENTO" id="em_andamento">EM ANDAMENTO</option>
+            <option value="FINALIZADO" id="finalizado"> FINALIZADO</option>
+            <option value="PENDENTE" id="pendente">PENDENTE</option>
+        </select>
+
+        <Button name="pesquisar" id="pesquisar">Pesquisar</Button>
+        
+    </div>
+    <div>
+    <table id="tarefas">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Data criação</th>
+            <th>Titulo</th>
+            <th>Data Vencimento</th>
+        </tr>
+        </thead>
+
+        <tbody id="dados">
+       
+        </tbody>
+
+    </div>
+
+    <table>
+</body>
+</html>
