@@ -25,7 +25,7 @@ function listarTarefas(data){
         const novaColunaDataVencimento = document.createElement('td')
         const novaColunaSituacao = document.createElement('td')
         const colunaBotoes = document.createElement('td')
-        const btnDeletar = document.createElement('Button')
+        var btnDeletar = document.createElement('Button')
         
 
 
@@ -107,6 +107,24 @@ function deletarTarefa(id){
     })
     .then(response => console.log(response))
 
+}
+
+
+
+pesquisar.addEventListener('click', function(event){
+    const pesquisar = document.getElementById('pesquisar');
+    const situacao = document.getElementById('situacao').value;
+    pesquisaSituacao(situacao)
+})
+
+
+
+function pesquisaSituacao(situacao){
+    fetch(`http://localhost:8080/tarefas?situacao=${situacao}`)
+    .then(response=> response.json())
+    .then(data=>{
+    listarTarefas(data.content)
+    })
 }
 
 
