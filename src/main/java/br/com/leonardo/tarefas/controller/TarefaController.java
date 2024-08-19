@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("tarefas")
+@CrossOrigin(origins = "*")
 public class TarefaController {
 
     @Autowired

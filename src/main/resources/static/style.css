@@ -16,5 +16,6 @@ div{
 }
 
 table{
-    margin: auto;
+    margin:auto;
+    border-spacing: 100px 0;
 }

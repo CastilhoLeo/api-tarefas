@@ -22,6 +22,7 @@
         </select>
 
         <Button name="pesquisar" id="pesquisar">Pesquisar</Button>
+        <Button name ="novaTarefa" id="novaTarefa">Nova tarefa</Button>
         
     </div>
     <div>
@@ -29,18 +30,46 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>Data criação</th>
             <th>Titulo</th>
             <th>Data Vencimento</th>
+            <th>Situação</th>
+            <th></th>
         </tr>
         </thead>
 
         <tbody id="dados">
        
         </tbody>
+    <table>
 
     </div>
+    <div>
+        <dialog id="modal">
+            <div>
+                <h1>Cadastrar Tarefa</h1>
+                <form id="cadastro">
+                    <label for="tituloForm">Titulo</label>
+                    <input type="text" id="tituloForm" name="tituloForm">
+                    <label for="dataVencimentoForm">Data Vencimento</label>
+                    <input type="date" id="dataVencimentoForm" name="dataVencimentoForm">
+                    <label for="descricaoForm">Descrição</label>
+                    <textarea id="descricaoForm" name="descricaoForm"></textarea>
+                    <label for="situacaoForm">Situacao</label>
+                    <select id="situacaoForm" name="situacaoForm">
+                        <option value="EM_ANDAMENTO" id="em_andamentoForm">EM ANDAMENTO</option>
+                        <option value="FINALIZADO" id="finalizadoForm"> FINALIZADO</option>
+                        <option value="PENDENTE" id="pendenteFormm">PENDENTE</option>
+                    </select>
+                <button id="gravarTarefa" type="submit">Gravar</button>
+                </form>
+            </div>
+        
+        <button id="fechar">Fechar</button>
 
-    <table>
+        </dialog>
+    </div>
+
+
+        <script src="script.js"></script>
 </body>
 </html>
