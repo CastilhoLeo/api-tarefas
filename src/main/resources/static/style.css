@@ -15,8 +15,7 @@ div{
     margin-top: 20px;
 }
 
-.tarefas{
+table{
     margin:auto;
+    border-spacing: 100px 0;
 }
-
-
