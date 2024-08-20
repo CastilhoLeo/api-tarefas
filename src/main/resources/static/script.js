@@ -26,6 +26,7 @@ function listarTarefas(data){
         const novaColunaSituacao = document.createElement('td')
         const colunaBotoes = document.createElement('td')
         var btnDeletar = document.createElement('Button')
+        var btnVisualizar = document.createElement('Button')
         
 
 
@@ -36,6 +37,9 @@ function listarTarefas(data){
 
         btnDeletar.id = `${tarefa.id}`
         btnDeletar.textContent = "Deletar"
+
+        btnVisualizar.id = `${tarefa.id}`
+        btnVisualizar.textContent = "Visualizar"
         
 
         linha.appendChild(novaColunaId)
@@ -44,9 +48,15 @@ function listarTarefas(data){
         linha.appendChild(novaColunaSituacao)
         linha.appendChild(colunaBotoes)
         colunaBotoes.appendChild(btnDeletar)
+        colunaBotoes.appendChild(btnVisualizar)
 
         btnDeletar.addEventListener('click', function() {
             deletarTarefa(this.id)
+        })
+
+        btnVisualizar.addEventListener('click', function(){
+            modal.showModal();
+            visualizarTarefa(this.id)
         })
     }
 
@@ -84,6 +94,7 @@ formularioTarefa.addEventListener('submit', function(event){
         descricao: descricao,
         situacao: situacao
     };
+
 
     salvarTarefa(tarefa)
     
@@ -127,4 +138,40 @@ function pesquisaSituacao(situacao){
     })
 }
 
+
+
+function visualizarTarefa(id){
+    fetch(`http://localhost:8080/tarefas/${id}`)
+    .then(response => response.json())
+    .then (tarefa => inserirDadosTarefa(tarefa))
+    console.log(tarefa)
+
+}
+
+function inserirDadosTarefa(tarefa){
+    document.getElementById('tituloForm').value = tarefa.titulo
+    document.getElementById('dataVencimentoForm').value = tarefa.dataVencimento
+    document.getElementById('situacaoForm').value = tarefa.situacao
+    document.getElementById('descricaoForm').value = tarefa.descricao
+    
+}
+
+function editarTarefa(){
+    const id = tarefa.id
+    
+    const tarefa = {
+        titulo: document.getElementById('tituloForm').value,
+        dataVencimento: document.getElementById('dataVencimentoForm').value,
+        situacao: document.getElementById('situacaoForm').value,
+        descricao: document.getElementById('descricaoForm').value
+    }
+
+    fetch(`http://localhost:8080/tarefas/${tarefa.id}`, {
+        method: 'PUT',
+        headers :{'Content-Type': 'application/json'},
+        body: JSON.stringify(tarefa)
+    }).then(response => response.json())
+    .then(data => console.log(data))
+       
+}
 
