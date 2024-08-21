@@ -14,5 +14,6 @@ import java.time.LocalDate;
 public interface TarefaRepository extends JpaRepository<Tarefa, Long>, JpaSpecificationExecutor<Tarefa> {
 
 
-    Page<Tarefa> findBySituacao (Situacao situacao, Pageable pageable);
+    Page<Tarefa> findBySituacaoOrderByDataVencimentoAsc (Situacao situacao, Pageable pageable);
+
 }

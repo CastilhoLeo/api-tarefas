@@ -66,7 +66,7 @@ public class TarefaService {
         }
         else {
 
-            Page<Tarefa> page = this.tarefaRepository.findBySituacao(situacao, pageable);
+            Page<Tarefa> page = this.tarefaRepository.findBySituacaoOrderByDataVencimentoAsc(situacao, pageable);
             Page<TarefaDTO> pageDTO = page.map(tarefaConverter::toDTO);
 
             return pageDTO;

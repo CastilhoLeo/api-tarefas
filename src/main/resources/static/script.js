@@ -52,6 +52,8 @@ function listarTarefas(data){
 
         btnDeletar.addEventListener('click', function() {
             deletarTarefa(this.id)
+            location.reload();
+    
         })
 
         btnVisualizar.addEventListener('click', function(){
@@ -95,10 +97,17 @@ formularioTarefa.addEventListener('submit', function(event){
         situacao: situacao
     };
 
+    if (edicao) {
+        editarTarefa(idEdicao, tarefa);
+        modal.close();
+        location.reload();
+    } else {
+        salvarTarefa(tarefa);
+    }
 
-    salvarTarefa(tarefa)
-    
-})
+    edicao = false;
+    idEdicao = null;
+});
 
 function salvarTarefa(tarefa){
     fetch(`http://localhost:8080/tarefas`,{
@@ -117,6 +126,7 @@ function deletarTarefa(id){
         method: 'DELETE'
     })
     .then(response => console.log(response))
+
 
 }
 
@@ -138,14 +148,21 @@ function pesquisaSituacao(situacao){
     })
 }
 
-
+let edicao = false;
+let idEdicao = null;
 
 function visualizarTarefa(id){
     fetch(`http://localhost:8080/tarefas/${id}`)
     .then(response => response.json())
-    .then (tarefa => inserirDadosTarefa(tarefa))
-    console.log(tarefa)
+    .then (tarefa => {
+        inserirDadosTarefa(tarefa);
 
+        edicao = true;
+        idEdicao = id;
+    
+    
+    });
+    
 }
 
 function inserirDadosTarefa(tarefa){
@@ -156,17 +173,9 @@ function inserirDadosTarefa(tarefa){
     
 }
 
-function editarTarefa(){
-    const id = tarefa.id
-    
-    const tarefa = {
-        titulo: document.getElementById('tituloForm').value,
-        dataVencimento: document.getElementById('dataVencimentoForm').value,
-        situacao: document.getElementById('situacaoForm').value,
-        descricao: document.getElementById('descricaoForm').value
-    }
+function editarTarefa(id, tarefa){
 
-    fetch(`http://localhost:8080/tarefas/${tarefa.id}`, {
+    fetch(`http://localhost:8080/tarefas/${id}`, {
         method: 'PUT',
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)
