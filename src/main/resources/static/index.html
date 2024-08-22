@@ -45,10 +45,10 @@
     </div>
     <div>
         <dialog id="modal" class="tarefasModal">
-            <div>
+            <div class="divForm">
                 <h1>Cadastrar Tarefa</h1>
                 <form id="cadastro" class="cadastroForm">
-                    <label for="tituloForm">Titulo</label>
+                    <label for="tituloForm" class="tituloForm">Titulo</label>
                     <input type="text" id="tituloForm" name="tituloForm">
                     <label for="dataVencimentoForm">Data Vencimento</label>
                     <input type="date" id="dataVencimentoForm" name="dataVencimentoForm">
@@ -60,10 +60,10 @@
                         <option value="FINALIZADO" id="finalizadoForm"> FINALIZADO</option>
                         <option value="PENDENTE" id="pendenteFormm">PENDENTE</option>
                     </select>
-                <button id="gravarTarefa" type="submit">Gravar</button>
+                
                 </form>
             </div>
-        
+        <button id="gravarTarefa" type="submit" form="cadastro">Gravar</button>
         <button id="fechar">Fechar</button>
 
         </dialog>

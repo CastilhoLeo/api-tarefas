@@ -130,6 +130,7 @@ function deletarTarefa(id){
     })
     .then(response => console.log(response))
 
+    location.reload();
 
 }};
 

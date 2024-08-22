@@ -17,12 +17,12 @@ div{
 
 
 table th{
-    background-color: rgb(166, 218, 166);
+    background-color: rgb(179, 223, 179);
     width: 20%;
 
 }
 table tr:nth-child(odd){
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(219, 226, 245);
 }
 
 table tr:nth-child(even){
@@ -37,6 +37,7 @@ table tr:nth-child(even){
 .tarefasModal{
     height: 70%;
     width: 30%;
+    background-color: rgb(219, 226, 245);
     
 }
 
@@ -45,8 +46,49 @@ table tr:nth-child(even){
     margin-top: 20px;
 }
 
-.gravarTarefa{
-    
+.cadastroForm{
+    height: 100%;
+    width: 100%;
+}
+
+#descricaoForm{
+    width: 100%;
+    height: 100px;
+    resize: both;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#tituloForm{
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#dataVencimentoForm{
+    width: 25%;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 
+.tituloForm{
+    height: 30%;
+}
+
+label{
+    font-size: large;
+    font-weight: bold;
+}
+
+#gravarTarefa{
+    margin-top: 15%;
+    background-color: rgb(107, 147, 198);
+    font-weight: bold;
+}
+
+#fechar{
+    margin-top: 15%;
+    background-color: rgb(118, 82, 82);
+    font-weight: bold;
+}
