@@ -15,7 +15,38 @@ div{
     margin-top: 20px;
 }
 
-table{
-    margin:auto;
-    border-spacing: 100px 0;
+
+table th{
+    background-color: rgb(166, 218, 166);
+    width: 20%;
+
 }
+table tr:nth-child(odd){
+    background-color: rgb(255, 255, 255);
+}
+
+table tr:nth-child(even){
+    background-color: rgb(247, 243, 243);
+}
+
+.tarefas{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tarefasModal{
+    height: 70%;
+    width: 30%;
+    
+}
+
+.tarefasModal label{
+    display: block;
+    margin-top: 20px;
+}
+
+.gravarTarefa{
+    
+}
+
+

@@ -122,13 +122,16 @@ function salvarTarefa(tarefa){
 }
 
 function deletarTarefa(id){
+    
+    if (confirm(`Confirma a exclusão?`) == true) {
+    
     fetch(`http://localhost:8080/tarefas/${id}`,{
         method: 'DELETE'
     })
     .then(response => console.log(response))
 
 
-}
+}};
 
 
 
