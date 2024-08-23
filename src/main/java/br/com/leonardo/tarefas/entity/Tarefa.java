@@ -2,6 +2,7 @@ package br.com.leonardo.tarefas.entity;
 
 import br.com.leonardo.tarefas.enums.Situacao;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,6 +22,8 @@ public class Tarefa {
     @Column(nullable = false)
     private Long id;
 
+    @Column(nullable = false)
+    @NotBlank(message = "O preenchimento do título é obrigatório")
     private String titulo;
 
     private String descricao;

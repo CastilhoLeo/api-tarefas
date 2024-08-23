@@ -35,7 +35,7 @@ table tr:nth-child(even){
 }
 
 .tarefasModal{
-    height: 70%;
+    height: 80%;
     width: 30%;
     background-color: rgb(219, 226, 245);
     
@@ -88,7 +88,7 @@ label{
 }
 
 #fechar{
-    margin-top: 15%;
+    margin-top: 10%;
     background-color: rgb(118, 82, 82);
     font-weight: bold;
 }

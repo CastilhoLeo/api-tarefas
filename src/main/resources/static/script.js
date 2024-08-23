@@ -115,8 +115,11 @@ function salvarTarefa(tarefa){
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)
     })
+    
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+        alert(data.message)
+    })
 
     document.getElementById('cadastro').reset();
 }
