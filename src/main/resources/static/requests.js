@@ -72,7 +72,18 @@ function editarTarefa(id, tarefa){
         method: 'PUT',
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)
-    }).then(response => response.json())
-    .then(data => console.log(data))
+    }) .then(response=>{
+        if(response.ok){
+            response.json()
+            alert("Tarefa alterada com sucesso!")
+            document.getElementById('cadastro').reset();}
+            
+        else{
+             response.json()
+            .then(data => {
+            alert(data.message)
+            console.log(data)
+    })
+}})
        
 }
