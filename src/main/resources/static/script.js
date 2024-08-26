@@ -1,69 +1,98 @@
 document.addEventListener('DomContentLoaded', pesquisaTodasTarefas())
 
-function pesquisaTodasTarefas(){
+let edicao = false;
+let idEdicao = null;
 
-    fetch('http://localhost:8080/tarefas')
-    .then(response=> response.json())
-    .then(data=>{
-    listarTarefas(data.content)
-    }) 
-}
+function listarTarefas(data) {
 
-function listarTarefas(data){
+    const tbody = document.getElementById('dados');
+    tbody.innerHTML = '';
 
-    const tbody = document.getElementById('dados')
-    tbody.innerHTML='';
-    
-
-    for(tarefa of data){
+    data.forEach(tarefa => {
 
         const linha = document.createElement('tr');
-        tbody.appendChild(linha)
+        tbody.appendChild(linha);
 
-        const novaColunaId = document.createElement('td')
-        const novaColunaTitulo = document.createElement('td')
-        const novaColunaDataVencimento = document.createElement('td')
-        const novaColunaSituacao = document.createElement('td')
-        const colunaBotoes = document.createElement('td')
-        var btnDeletar = document.createElement('Button')
-        var btnVisualizar = document.createElement('Button')
-        
+        const novaColunaId = document.createElement('td');
+        const novaColunaTitulo = document.createElement('td');
+        const novaColunaDataVencimento = document.createElement('td');
+        const novaColunaSituacao = document.createElement('td');
+        const colunaBotoes = document.createElement('td');
+        colunaBotoes.className = "colunaBotoes";
 
+        const btnDeletar = document.createElement('Button');
+        const btnVisualizar = document.createElement('Button');
+        const btnFinalizarReabrir = document.createElement('Button');
 
-        novaColunaId.textContent = `${tarefa.id}`
-        novaColunaTitulo.textContent = `${tarefa.titulo}`
-        novaColunaDataVencimento.textContent = `${tarefa.dataVencimento}`
-        novaColunaSituacao.textContent = `${tarefa.situacao}`
+        novaColunaId.textContent = `${tarefa.id}`;
+        novaColunaTitulo.textContent = `${tarefa.titulo}`;
+        novaColunaDataVencimento.textContent = `${tarefa.dataVencimento}`;
+        novaColunaSituacao.textContent = `${tarefa.situacao}`;
 
-        btnDeletar.id = `${tarefa.id}`
-        btnDeletar.textContent = "Deletar"
+        btnDeletar.id = `btnDeletar-${tarefa.id}`;
+        btnDeletar.textContent = "Deletar";
+        btnDeletar.dataset.id = tarefa.id;
+        btnDeletar.className = "btn-Deletar";
 
-        btnVisualizar.id = `${tarefa.id}`
-        btnVisualizar.textContent = "Visualizar"
-        
+        btnVisualizar.id = `btnVisualizar-${tarefa.id}`;
+        btnVisualizar.textContent = "Visualizar";
+        btnVisualizar.dataset.id = tarefa.id;
+        btnVisualizar.className = "btn-Visualizar";
 
-        linha.appendChild(novaColunaId)
-        linha.appendChild(novaColunaTitulo)
-        linha.appendChild(novaColunaDataVencimento)
-        linha.appendChild(novaColunaSituacao)
-        linha.appendChild(colunaBotoes)
-        colunaBotoes.appendChild(btnDeletar)
-        colunaBotoes.appendChild(btnVisualizar)
+        if (tarefa.situacao === "PENDENTE") {
+            btnFinalizarReabrir.id = `btnFinalizar-${tarefa.id}`;
+            btnFinalizarReabrir.textContent = "Finalizar";
+            btnFinalizarReabrir.dataset.id = tarefa.id;
+            btnFinalizarReabrir.className = "btn-Finalizar";
+        } else {
+            btnFinalizarReabrir.id = `btnReabrir-${tarefa.id}`;
+            btnFinalizarReabrir.textContent = "Reabrir";
+            btnFinalizarReabrir.dataset.id = tarefa.id;
+            btnFinalizarReabrir.className = "btn-Reabrir";
+        }
 
-        btnDeletar.addEventListener('click', function() {
-            deletarTarefa(this.id)
+        linha.appendChild(novaColunaId);
+        linha.appendChild(novaColunaTitulo);
+        linha.appendChild(novaColunaDataVencimento);
+        linha.appendChild(novaColunaSituacao);
+        linha.appendChild(colunaBotoes);
+        colunaBotoes.appendChild(btnFinalizarReabrir);
+        colunaBotoes.appendChild(btnDeletar);
+        colunaBotoes.appendChild(btnVisualizar);
+
+        btnDeletar.addEventListener('click', function(event) {
+            const id = event.target.dataset.id;
+            deletarTarefa(id);
             location.reload();
-    
-        })
+        });
 
-        btnVisualizar.addEventListener('click', function(){
+        btnVisualizar.addEventListener('click', function(event) {
+            const id = event.target.dataset.id;
             modal.showModal();
-            visualizarTarefa(this.id)
-        })
-    }
+            visualizarTarefa(id);
+        });
 
+        btnFinalizarReabrir.addEventListener('click', function(event) {
+            const id = event.target.dataset.id;
+            const isFinalizar = event.target.classList.contains("btn-Finalizar");
+
+            tarefa.situacao = isFinalizar ? "FINALIZADO" : "PENDENTE";
+
+            editarTarefa(id, tarefa);
+            location.reload();
+        });
+    });
+
+
+    }
     
-}
+
+
+
+
+
+
+
 
 const cadastroBtn = document.getElementById('novaTarefa')
 const modal = document.getElementById('modal')
@@ -109,34 +138,6 @@ formularioTarefa.addEventListener('submit', function(event){
     idEdicao = null;
 });
 
-function salvarTarefa(tarefa){
-    fetch(`http://localhost:8080/tarefas`,{
-        method: 'POST',
-        headers :{'Content-Type': 'application/json'},
-        body: JSON.stringify(tarefa)
-    })
-    
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message)
-    })
-
-    document.getElementById('cadastro').reset();
-}
-
-function deletarTarefa(id){
-    
-    if (confirm(`Confirma a exclusão?`) == true) {
-    
-    fetch(`http://localhost:8080/tarefas/${id}`,{
-        method: 'DELETE'
-    })
-    .then(response => console.log(response))
-
-    location.reload();
-
-}};
-
 
 
 pesquisar.addEventListener('click', function(event){
@@ -147,30 +148,6 @@ pesquisar.addEventListener('click', function(event){
 
 
 
-function pesquisaSituacao(situacao){
-    fetch(`http://localhost:8080/tarefas?situacao=${situacao}`)
-    .then(response=> response.json())
-    .then(data=>{
-    listarTarefas(data.content)
-    })
-}
-
-let edicao = false;
-let idEdicao = null;
-
-function visualizarTarefa(id){
-    fetch(`http://localhost:8080/tarefas/${id}`)
-    .then(response => response.json())
-    .then (tarefa => {
-        inserirDadosTarefa(tarefa);
-
-        edicao = true;
-        idEdicao = id;
-    
-    
-    });
-    
-}
 
 function inserirDadosTarefa(tarefa){
     document.getElementById('tituloForm').value = tarefa.titulo
@@ -180,14 +157,7 @@ function inserirDadosTarefa(tarefa){
     
 }
 
-function editarTarefa(id, tarefa){
 
-    fetch(`http://localhost:8080/tarefas/${id}`, {
-        method: 'PUT',
-        headers :{'Content-Type': 'application/json'},
-        body: JSON.stringify(tarefa)
-    }).then(response => response.json())
-    .then(data => console.log(data))
-       
-}
+
+
 

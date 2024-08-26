@@ -3,10 +3,12 @@ package br.com.leonardo.tarefas.entity;
 import br.com.leonardo.tarefas.enums.Situacao;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDate;
 
@@ -22,7 +24,6 @@ public class Tarefa {
     @Column(nullable = false)
     private Long id;
 
-    @Column(nullable = false)
     @NotBlank(message = "O preenchimento do título é obrigatório")
     private String titulo;
 
@@ -32,6 +33,7 @@ public class Tarefa {
     @Temporal(TemporalType.DATE)
     private LocalDate dataCriacao;
 
+    @NotNull(message = "A data de vencimento é obrigatória")
     @Column(name = "data_vencimento")
     @Temporal(TemporalType.DATE)
     private LocalDate dataVencimento;

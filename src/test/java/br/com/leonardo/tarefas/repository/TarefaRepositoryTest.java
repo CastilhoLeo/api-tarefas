@@ -31,20 +31,19 @@ public class TarefaRepositoryTest {
         tarefa2.setId(2L);
         tarefa2.setSituacao(Situacao.FINALIZADO);
         Tarefa tarefa3 = TarefaBuilder.criarTarefa();
-        tarefa3.setId(3L);
-        tarefa3.setSituacao(Situacao.EM_ANDAMENTO);
+
 
         List<Tarefa> lista = new ArrayList<>();
         lista.add(tarefa1);
         lista.add(tarefa2);
-        lista.add(tarefa3);
+
 
         tarefaRepository.saveAll(lista);
     }
 
     @Test
     public void findBySituacao(){
-        Page<Tarefa> page = this.tarefaRepository.findBySituacao(Situacao.PENDENTE, pageable);
+        Page<Tarefa> page = this.tarefaRepository.findBySituacaoOrderByDataVencimentoAsc(Situacao.PENDENTE, pageable);
 
         Assertions.assertEquals(page.getSize(), 1);
         Assertions.assertEquals(page.getContent().get(0).getId(), 1L);

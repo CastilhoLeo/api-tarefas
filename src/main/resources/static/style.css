@@ -12,32 +12,35 @@ header h1{
 
 div{
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 
 table th{
-    background-color: rgb(179, 223, 179);
+    background-color: rgb(162, 174, 239);
     width: 20%;
+    font-size: 20px;
 
 }
 table tr:nth-child(odd){
-    background-color: rgb(219, 226, 245);
+    background-color: white;
 }
 
 table tr:nth-child(even){
-    background-color: rgb(247, 243, 243);
+    background-color: rgba(234, 233, 233, 0.895);
 }
 
 .tarefas{
     width: 100%;
     border-collapse: collapse;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
 .tarefasModal{
     height: 80%;
     width: 30%;
-    background-color: rgb(219, 226, 245);
+    background-color: rgb(230, 233, 240);
     
 }
 
@@ -89,6 +92,20 @@ label{
 
 #fechar{
     margin-top: 10%;
-    background-color: rgb(118, 82, 82);
+    background-color: rgb(245, 174, 174);
     font-weight: bold;
+}
+
+.btn-Finalizar{
+    background-color: green;
+}
+
+.btn-Reabrir{
+    background-color: red;
+}
+
+td.colunaBotoes {
+    text-align: left; /* Alinha o conteúdo à esquerda */
+    padding-left: 0; /* Remove qualquer padding à esquerda */
+    margin-left: 0; /* Remove qualquer margem à esquerda */
 }
