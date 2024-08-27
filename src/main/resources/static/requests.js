@@ -87,3 +87,24 @@ function editarTarefa(id, tarefa){
 }})
        
 }
+
+
+function editarSituacao(id, tarefa){
+
+    fetch(`http://localhost:8080/tarefas/${id}`, {
+        method: 'PUT',
+        headers :{'Content-Type': 'application/json'},
+        body: JSON.stringify(tarefa)
+    }) .then(response=>{
+        if(response.ok){
+            response.json()}
+            
+        else{
+             response.json()
+            .then(data => {
+            alert(data.message)
+            console.log(data)
+    })
+}})
+       
+}

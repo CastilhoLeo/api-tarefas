@@ -78,7 +78,7 @@ function listarTarefas(data) {
 
             tarefa.situacao = isFinalizar ? "FINALIZADO" : "PENDENTE";
 
-            editarTarefa(id, tarefa);
+            editarSituacao(id, tarefa);
             location.reload();
         });
     });
@@ -86,7 +86,6 @@ function listarTarefas(data) {
 
     }
     
-
 
 const cadastroBtn = document.getElementById('novaTarefa')
 const modal = document.getElementById('modal')
@@ -139,8 +138,6 @@ pesquisar.addEventListener('click', function(event){
     const situacao = document.getElementById('situacao').value;
     pesquisaSituacao(situacao)
 })
-
-
 
 
 function inserirDadosTarefa(tarefa){
