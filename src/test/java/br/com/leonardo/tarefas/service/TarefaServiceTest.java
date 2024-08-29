@@ -166,14 +166,14 @@ public class TarefaServiceTest {
         Page<Tarefa> pageTarefas = new PageImpl<>(listaTarefas);
 
 
-        Mockito.when(tarefaRepository.findAll(any(Pageable.class))).thenReturn(pageTarefas);
+        Mockito.when(tarefaRepository.localizarTodos(any(Pageable.class))).thenReturn(pageTarefas);
         Mockito.when(tarefaConverter.toDTO(tarefa1)).thenReturn(tarefaDTO1);
         Mockito.when(tarefaConverter.toDTO(tarefa2)).thenReturn(tarefaDTO2);
         Mockito.when(tarefaConverter.toDTO(tarefa3)).thenReturn(tarefaDTO3);
 
         Page<TarefaDTO> pageCriado = tarefaService.pesquisaDinamica( null, pageable);
 
-        Mockito.verify(tarefaRepository, Mockito.times(1)).findAll(pageable);
+        Mockito.verify(tarefaRepository, Mockito.times(1)).localizarTodos(pageable);
         Assertions.assertEquals(pageCriado.getSize(), 3);
         Assertions.assertEquals(pageCriado.getContent().get(0).getClass(), TarefaDTO.class);
 
