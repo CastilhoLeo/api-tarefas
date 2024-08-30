@@ -1,6 +1,8 @@
+const baseUrl = `${window.location.protocol}//${window.location.host}`;
+
 function pesquisaTodasTarefas(){
 
-    fetch('http://localhost:8080/tarefas')
+    fetch(`${baseUrl}/tarefas`)
     .then(response=> response.json())
     .then(data=>{
     listarTarefas(data.content)
@@ -8,7 +10,7 @@ function pesquisaTodasTarefas(){
 }
 
 function salvarTarefa(tarefa){
-    fetch(`http://localhost:8080/tarefas`,{
+    fetch(`${baseUrl}/tarefas`,{
         method: 'POST',
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)
@@ -34,7 +36,7 @@ function deletarTarefa(id){
     
     if (confirm(`Confirma a exclusão?`) == true) {
     
-    fetch(`http://localhost:8080/tarefas/${id}`,{
+    fetch(`${baseUrl}/tarefas/${id}`,{
         method: 'DELETE'
     })
     .then(response => console.log(response))
@@ -44,7 +46,7 @@ function deletarTarefa(id){
 }};
 
 function pesquisaSituacao(situacao){
-    fetch(`http://localhost:8080/tarefas?situacao=${situacao}`)
+    fetch(`${baseUrl}/tarefas?situacao=${situacao}`)
     .then(response=> response.json())
     .then(data=>{
     listarTarefas(data.content)
@@ -54,7 +56,7 @@ function pesquisaSituacao(situacao){
 
 
 function visualizarTarefa(id){
-    fetch(`http://localhost:8080/tarefas/${id}`)
+    fetch(`${baseUrl}/tarefas/${id}`)
     .then(response => response.json())
     .then (tarefa => {
         inserirDadosTarefa(tarefa);
@@ -68,7 +70,7 @@ function visualizarTarefa(id){
 
 function editarTarefa(id, tarefa){
 
-    fetch(`http://localhost:8080/tarefas/${id}`, {
+    fetch(`${baseUrl}/tarefas/${id}`, {
         method: 'PUT',
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)
@@ -91,7 +93,7 @@ function editarTarefa(id, tarefa){
 
 function editarSituacao(id, tarefa){
 
-    fetch(`http://localhost:8080/tarefas/${id}`, {
+    fetch(`${baseUrl}/tarefas/${id}`, {
         method: 'PUT',
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)
