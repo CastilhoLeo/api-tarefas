@@ -86,7 +86,6 @@ function listarTarefas(data) {
 
     }
     
-
 const cadastroBtn = document.getElementById('novaTarefa')
 const modal = document.getElementById('modal')
 
