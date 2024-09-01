@@ -109,3 +109,9 @@ td.colunaBotoes {
     padding-left: 0; /* Remove qualquer padding à esquerda */
     margin-left: 0; /* Remove qualquer margem à esquerda */
 }
+
+button{
+    border-radius: 5px;
+    padding: 15px 32px;
+    cursor: pointer;
+}
