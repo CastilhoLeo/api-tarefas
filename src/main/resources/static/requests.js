@@ -1,8 +1,6 @@
-const baseUrl = `${window.location.protocol}`;
-
 function pesquisaTodasTarefas(){
 
-    fetch(`${baseUrl}/tarefas`)
+    fetch(`http://localhost:8080/tarefas`)
     .then(response=> response.json())
     .then(data=>{
     listarTarefas(data.content)
@@ -10,7 +8,7 @@ function pesquisaTodasTarefas(){
 }
 
 function salvarTarefa(tarefa){
-    fetch(`${baseUrl}/tarefas`,{
+    fetch(`http://localhost:8080/tarefas`,{
         method: 'POST',
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)
@@ -36,7 +34,7 @@ function deletarTarefa(id){
     
     if (confirm(`Confirma a exclusão?`) == true) {
     
-    fetch(`${baseUrl}/tarefas/${id}`,{
+    fetch(`http://localhost:8080/tarefas/${id}`,{
         method: 'DELETE'
     })
     .then(response => console.log(response))
@@ -46,7 +44,7 @@ function deletarTarefa(id){
 }};
 
 function pesquisaSituacao(situacao){
-    fetch(`${baseUrl}/tarefas?situacao=${situacao}`)
+    fetch(`http://localhost:8080/tarefas?situacao=${situacao}`)
     .then(response=> response.json())
     .then(data=>{
     listarTarefas(data.content)
@@ -56,7 +54,7 @@ function pesquisaSituacao(situacao){
 
 
 function visualizarTarefa(id){
-    fetch(`${baseUrl}/tarefas/${id}`)
+    fetch(`http://localhost:8080/tarefas/${id}`)
     .then(response => response.json())
     .then (tarefa => {
         inserirDadosTarefa(tarefa);
@@ -70,7 +68,7 @@ function visualizarTarefa(id){
 
 function editarTarefa(id, tarefa){
 
-    fetch(`${baseUrl}/tarefas/${id}`, {
+    fetch(`http://localhost:8080/tarefas/${id}`, {
         method: 'PUT',
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)
@@ -93,7 +91,7 @@ function editarTarefa(id, tarefa){
 
 function editarSituacao(id, tarefa){
 
-    fetch(`${baseUrl}/tarefas/${id}`, {
+    fetch(`http://localhost:8080/tarefas/${id}`, {
         method: 'PUT',
         headers :{'Content-Type': 'application/json'},
         body: JSON.stringify(tarefa)

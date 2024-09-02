@@ -1,5 +1,5 @@
 header{
-background-color: blue;
+background-color: rgb(162, 174, 239);
 height: 50px;
 }
 
@@ -86,22 +86,22 @@ label{
 
 #gravarTarefa{
     margin-top: 15%;
-    background-color: rgb(107, 147, 198);
+    background-color: rgb(118, 238, 118);
     font-weight: bold;
 }
 
 #fechar{
     margin-top: 10%;
-    background-color: rgb(245, 174, 174);
+    background-color: rgb(235, 109, 109);
     font-weight: bold;
 }
 
 .btn-Finalizar{
-    background-color: green;
+    background-color: rgb(118, 238, 118);
 }
 
 .btn-Reabrir{
-    background-color: red;
+    background-color: rgb(235, 109, 109);
 }
 
 td.colunaBotoes {
@@ -114,4 +114,8 @@ button{
     border-radius: 5px;
     padding: 7px 20px;
     cursor: pointer;
+}
+
+select{
+    padding: 5px 15px;
 }
