@@ -1,4 +1,4 @@
-const baseUrl = `${window.location.protocol}//localhost:8080`;
+const baseUrl = 'https://api-tarefas-9v0k.onrender.com';
 
 
 function pesquisaTodasTarefas(){
