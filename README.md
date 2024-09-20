@@ -1,10 +1,14 @@
-<h1 align = 'center'>Api - Tarefas</h1>
+<h1 align = 'center'>API - TAREFAS</h1>
 
 ![image](https://github.com/user-attachments/assets/5c4a8127-b59c-45d9-938f-c3d45ea7c09c)
 
+<h2 align = 'center'>Descrição do projeto</h2>
+<p>Api desenvolvida para reforçar os estudos de back-end e iniciar os estudos em front-end.</p>
+ <p> Nesta aplicação é possível realizar um controle de tarefas, onde é permitido, criar, editar, visualizar e excluir tarefas, assim como utilizar filtro de pesquisa pela situação da mesma. </p>
 
+<div align = 'center'>
 <h2 align ='center'>Ferramentas utilizadas</h2>
-<h3 align = 'center'>Back-end</h3>
+<h3 align ='center'>Back-end</h3>
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 
@@ -27,4 +31,6 @@
 
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 
-<h2 align = 'center'>Descrição do projeto</h2>
+</div>
+
+
