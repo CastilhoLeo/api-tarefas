@@ -14,12 +14,10 @@ public class TarefaDTO {
 
     private Long id;
 
-    @NotBlank(message = "O preenchimento do título é obrigatório")
     private String titulo;
 
     private String descricao;
 
-    @NotNull(message = "A data de vencimento é obrigatória")
     private LocalDate dataVencimento;
 
     private Situacao situacao;
